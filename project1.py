@@ -9,6 +9,7 @@ DIR = "/Users/tomas/Desktop/Code/Python/Project 1/images/"
 dictionary = {}
 mediun_dictionary = {}
 d = {}
+rgb  = [0,0,0]
 numberOfFiles = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 def open_files(dir = ""):
@@ -20,41 +21,30 @@ def open_files(dir = ""):
 def getMedianRGB(x,y):
     #Returns median for images at pixel x & y
     array = []
-    mediun_position = 0
+    returnArray = []
     for key, value in dictionary.items():
         rgb_im = dictionary[key].convert('RGB')
         red, green, blue = rgb_im.getpixel((x,y))
         array.append([red, green, blue])
         mediun_dictionary[key] = red + green + blue
-    print (mediun_dictionary)
-    d = OrderedDict(sorted(mediun_dictionary.items(), key=itemgetter(1)))
-    #print(d)
-    if numberOfFiles % 2 == 0:
-        mediun_position = numberOfFiles / 2
-    else:
-        mediun_position = numberOfFiles - 1 / 2
-    print(array)
-    return array[int(mediun_position)]
+
+    for key, value in mediun_dictionary.items():
+        for number in array:
+            if value == (number[0] + number[1] + number[2]):
+                returnArray = number
+                print(number)
+    return returnArray
 
 open_files(DIR)
 rgb = (getMedianRGB(dictionary["image1"].size[0] - 3, dictionary["image1"].size[1] - 1))
+print (rgb)
 img = Image.new( 'RGB', (dictionary["image1"].size[0] - 1, dictionary["image1"].size[1] - 1), "White")
 pixels = img.load()
-#print (rgb[0], rgb[1], rgb[2])
-pixels[0,1] = (rgb[0],rgb[1],rgb[2])
-# for x in range(0, dictionary["image1"].size[0] - 1):
-#     for y in range(0, dictionary["image1"].size[1] - 1):
-#         rgb = getMedianRGB(x,y)
-#         pixels[x,y] = (rgb[0], rgb[1], rgb[2])
-#         print(str(x) + " " + str(y))
+xSize = int((dictionary["image1"].size[0] - 1))
+ySize = int((dictionary["image1"].size[1] - 1))
+#for x in range(int(xSize/1.1), xSize):
+    # for y in range(int(ySize/1.1), ySize):
+    #    rgb = (getMedianRGB(x,y))
+    #    pixels[x,y] = (rgb[0], rgb[1], rgb[2])
+    #    print(str(x) + " " + str(y))
 img.show()
-#for key, value in dictionary.items():
-#print (value.size[1])
-#count = count + 1
-
-    #alpha = value.split()[-1]
-    #for xPixel in range(0, dictionary.image.size[0]):
-    #    for yPixel in range(0,value.size[1]):
-            #r,g,b = rgb_im.getpixel((xPixel, yPixel))
-            #print (r,g,b)
-#print(im.size[0])
