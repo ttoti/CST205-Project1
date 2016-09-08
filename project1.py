@@ -1,5 +1,5 @@
 #
-# * Title: project1.java
+# * Title: project1.py
 # * Abstract: This takes in images from local directory, removes the subject in the pictures by using a median filter
 # * Author: Tomas Hernandez
 # Date:9/9/2016
