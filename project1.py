@@ -2,6 +2,7 @@
 # * Title: project1.py
 # * Abstract: This takes in images from local directory, removes the subject in the pictures by using a median filter
 # * Author: Tomas Hernandez
+# * Github url: https://github.com/ttoti/CST205-Project1
 # Date:9/9/2016
 #!/usr/bin/env python3
 import os, os.path
@@ -9,6 +10,7 @@ import operator
 from PIL import Image, ImageFilter
 import sys
 
+#Change directory to fit your path
 DIR = "/Users/tomas/Desktop/Code/Python/Project 1/images/"
 #Get the number of files within the directory
 numberOfFiles = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
@@ -29,8 +31,8 @@ def getMedianRGB(x,y):
     medianRGB = []
     #Converts images to RGB to get pixel data then add to rgbArray for later use
     for key, value in dictionary.items():
-        rgb_im = dictionary[key].convert('RGB')
-        red, green, blue = rgb_im.getpixel((x,y))
+        #Add alpha variable if value exist
+        red, green, blue = dictionary[key].getpixel((x,y))
         rgbArray.append([red, green, blue])
         mediun_dictionary[key] = red + green + blue
 
